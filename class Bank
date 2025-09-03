@@ -1,0 +1,66 @@
+// class Bank, which contains mainly all the information/steps of the transaction
+class Bank {
+    private double amount;
+    private double[] arrayMoney;
+    private int transactionCount;
+
+    
+    public Bank(double startAmount) {
+        this.amount = startAmount;
+        this.arrayMoney = new double[100]; 
+        this.transactionCount = 0;
+    }
+
+    public void deposit(double getMoney) {
+        if (getMoney > 0) {
+            this.amount += getMoney;
+            addInteraction(getMoney);
+            System.out.println("Successful deposit of "+ getMoney + ", Your new balance is: $" + this.amount);
+        } else {
+            System.out.println("Invalid amount.");
+        }
+    }
+
+    public void withdrawal(double takeMoney) {
+        if (takeMoney > 0 && this.amount >= takeMoney) {
+            this.amount -= takeMoney;
+            addInteraction(-takeMoney);
+            System.out.println("Successful withdrawal of "+ takeMoney + ", Your new balance is: $" + this.amount);
+        } else {
+            System.out.println("Withdrawal has failed.");
+        }
+    }
+
+    public void listInteraction() {
+        System.out.println("History of your recent transactions:");
+            for (int i = 0; i < transactionCount; i++) {
+                System.out.println(arrayMoney[i]);
+            }
+        }
+        
+     // meant to help the method listInteraction    
+    private void addInteraction(double interaction) {
+        if (transactionCount < arrayMoney.length) {
+            arrayMoney[transactionCount] = interaction;
+            transactionCount++;
+        } 
+    } 
+}
+    
+   
+
+
+// this is for testing the class 
+// This is how the information will be output   
+public class Main {  
+    public static void main(String[] args) {
+        Bank account = new Bank(0.00); 
+        
+        
+        account.deposit(50.00);
+        account.withdrawal(10.00);
+    
+        System.out.println("");
+        account.listInteraction();    
+    }
+}
