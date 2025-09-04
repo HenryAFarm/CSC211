@@ -15,7 +15,7 @@ class Bank {
         if (getMoney > 0) {
             this.amount += getMoney;
             addInteraction(getMoney);
-            System.out.println("Successful deposit of +$"+ getMoney + ", Your new balance is: $" + this.amount);
+            System.out.println("Successful deposit of +$" + getMoney + ", Your new balance is: $" + this.amount);
         } else {
             System.out.println("Invalid amount.");
         }
@@ -25,7 +25,7 @@ class Bank {
         if (takeMoney > 0 && this.amount >= takeMoney) {
             this.amount -= takeMoney;
             addInteraction(-takeMoney);
-            System.out.println("Successful withdrawal of -$"+ takeMoney + ", Your new balance is: $" + this.amount);
+            System.out.println("Successful withdrawal of -$" + takeMoney + ", Your new balance is: $" + this.amount);
         } else {
             System.out.println("Withdrawal has failed.");
         }
