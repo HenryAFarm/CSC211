@@ -4,7 +4,7 @@ class Bank {
     private double[] arrayMoney;
     private int transactionCount;
 
-    
+     
     public Bank(double startAmount) {
         this.amount = startAmount;
         this.arrayMoney = new double[100]; 
