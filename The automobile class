@@ -1,0 +1,171 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Automobile implements Comparable<Automobile> {
+    private int modelYear;
+    private String brand;
+    
+    public Automobile(int modelYear, String brand) {
+        this.modelYear = modelYear;
+        this.brand = brand;
+    }
+
+    // these methods to use for the other classes
+    @Override
+    public String toString() {
+        
+        String s = "Car's brand: " + brand + ". The year of car is " +
+                modelYear;
+        
+        return s;
+    }
+    @Override
+    public int compareTo(Automobile automobile) {
+        int ComparingYears = Integer.compare(this.modelYear, automobile.modelYear);
+        
+        if (ComparingYears != 0) {
+            return ComparingYears;
+        }
+        return this.brand.compareTo(automobile.brand);
+    }
+    @Override
+    public boolean equals(Object o) {
+          if (this == o) return true;
+            
+          if (o == null) return false;       
+          Automobile that = (Automobile) o; 
+          return this.modelYear == that.modelYear && this.brand.equals(that.brand);
+        }
+
+    // functions of a Automobile
+    public void accelerate() {
+        System.out.println("Accelerating.");
+    }
+    public void stop() { 
+        System.out.println("Stop!");
+    }
+    public void reverse() {
+        System.out.println("Backing up!");
+    }
+    public void honk() {
+        System.out.println("Beep!");
+    }
+    public String getBrand(){
+        return brand;
+    }
+    public int getModelYear(){
+        return modelYear;
+    }
+}
+
+// class of car with its own details
+class Car extends Automobile {
+    public Car(int modelYear, String brand){
+        super (modelYear, brand);
+    }
+    
+    
+    @Override
+    public void accelerate() {
+        System.out.println(getBrand() + " is accelerating.");
+    }
+    @Override
+    public void stop() { 
+        System.out.println(getBrand() + " is at a stop.");
+    }
+    @Override
+    public void reverse() {
+        System.out.println(getBrand() + " backing up steady.");
+    }
+    @Override
+    public void honk() {
+        System.out.println(getBrand() + "'s honk is Beep Beep Beep!");
+    }
+    
+}
+//the sportcar class
+class SportsCar extends Automobile {
+     public SportsCar(int modelYear, String brand){
+        super (modelYear, brand);
+    }
+    
+    
+    @Override
+    public void accelerate() {
+        System.out.println(getBrand() + " is accelerating fast." );
+    }
+    @Override
+    public void stop() { 
+        System.out.println(getBrand() + " is at a stop!");
+    }
+    @Override
+    public void reverse() {
+        System.out.println(getBrand() + " is backing up fast!");
+    }
+    @Override
+    public void honk() {
+        System.out.println(getBrand() + "'s honks is Beep Beeeeeep!!!");
+    }
+    
+}
+// the junkcar class
+class JunkCar extends Automobile {
+    public JunkCar(int modelYear, String brand){
+        super (modelYear, brand);
+    }
+    
+  
+    @Override
+    public void accelerate() {
+        System.out.println(getBrand() + " is accelerating slowy.");
+    }
+    @Override
+    public void stop() { 
+        System.out.println(getBrand() + " is at a stop forever!");
+    }
+    @Override
+    public void reverse() {
+        System.out.println(getBrand() + " backing up is not working");
+    }
+    @Override
+    public void honk() {
+        System.out.println(getBrand() + "'s honks is  Be--..");
+    }
+ 
+}
+
+// a test class, to test the program
+public class Tester {
+    public static void main(String[] args) {
+    ArrayList<Automobile> automobileList = new ArrayList<>();
+        //Did this just to compare them for the equal method
+        Automobile car1 = new Car(2007, "Honda");
+        Automobile car2 = new Car(2012, "Honda");
+    
+        automobileList.add(car1);
+	    automobileList.add(new SportsCar(2025, "Lamborghini"));
+	    automobileList.add(new JunkCar(1999, "BMW"));
+		automobileList.add(car2);
+		
+		for (Automobile auto : automobileList){
+		    System.out.println(auto);
+		    System.out.println("");
+		    auto.accelerate();
+		    auto.honk();
+		    auto.reverse();
+		    auto.stop();
+		    System.out.println("");
+		}
+		// if these cars are equal or not (test)
+		System.out.println("Are these two cars equal to each other: "+ car1.getBrand()+" " + car1.getModelYear() +" and "+ 
+		car2.getBrand() +" "+ car2.getModelYear() +" it is: "+car1.equals(car2) + "\n");
+		
+		
+		// for compareing the cars listed in order
+		System.out.println("Comparing the different cars here listed here!");
+		Collections.sort(automobileList);
+		for (Automobile auto : automobileList){
+		    System.out.println(auto.getBrand() + "-" + auto.getModelYear());
+		}
+        
+}}
