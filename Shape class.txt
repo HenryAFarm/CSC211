@@ -1,0 +1,92 @@
+class Shape {
+    private int numSides;
+    
+    //constructor
+    public Shape(int numSides) {
+        this.numSides = numSides;
+    }
+    
+    //Setter
+    public void setSide(int numSides){
+        this.numSides = numSides;
+    }
+    //Getter
+    public int getSide(){
+        return numSides;
+    } 
+}
+//circle is a subclass of shape
+class Circle extends Shape{
+    private double radius;
+
+ 
+    public Circle(double radius, int numSides) {
+        super(numSides);
+        this.radius = radius;
+    }
+    
+    public void setRadius(int radius){
+        this.radius = radius;
+    }
+    public double getRadius(){
+        return radius;
+    }
+    
+    public double getArea() {
+        return Math.PI * Math.pow(radius, 2);
+    }
+}
+//rectangle, a subclass of shape
+class Rectangle extends Shape{
+    private double width;
+    private double length;
+
+    public Rectangle(double width, double length, int numSides) {
+        super(numSides);
+        this.width = width;
+        this.length = length;
+    }
+    
+    public void setWidth(double width) {
+        this.width = width;
+    }
+    
+    public double getWidth() {
+        return width;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+       
+    public double getLength() {
+        return length;
+    }
+ 
+
+    public double getArea1() {
+        return width * length;
+    }
+}
+
+
+
+public class Main{
+	public static void main(String[] args) {
+		Circle circle1 = new Circle(6.0, 0);
+		Rectangle rectangle1 = new Rectangle(7.0, 10.0, 4);
+		
+		//Just using all of the getters
+		System.out.println("This circle has a radius of: " + circle1.getRadius() + ".");
+		System.out.printf("While making the area to be: %.2f ", circle1.getArea());
+		//Using the getter methods
+		System.out.println("");
+		System.out.println("\nThis length of the rectangle: " + rectangle1.getLength() +
+	   ".\nThe width is: " + rectangle1.getWidth() + " So it's area is now: " + rectangle1.getArea1());
+		
+		System.out.println("");
+		//Seeing that the subclass are using the Superclass getter method!!
+		System.out.println("The amount of sides that a circle has: " + circle1.getSide());
+		System.out.println("The amount of sides that a rectangle has: " + rectangle1.getSide());
+		
+}}
