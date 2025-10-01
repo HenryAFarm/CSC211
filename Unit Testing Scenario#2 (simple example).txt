@@ -1,0 +1,40 @@
+// Scenario#2 - Seeing the interest being placed on your money(saving) over time.
+//Just a simple way to know what the expected amount will be after those years, soon you'll get this amount.
+
+public class InterestCalculator {
+
+    public double calculateSimpleInterest(double principal, double annualRate, double years) {
+
+       // For business sense validation!
+        if (principal < 0 || annualRate < 0 || years < 0) {
+            throw new IllegalArgumentException("Principal, annual rate, and years must all be non-negative.");
+        }
+
+        double decimalRate = annualRate / 100.0;
+        double interest = principal * decimalRate * years;
+
+        return Math.round(interest * 100.0) / 100.0;
+    }
+}
+//Unit testing here
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class InterestCalculatorTest {
+
+    private final InterestCalculator calculator = new InterestCalculator();
+
+    @Test
+    @DisplayName("Interest Rate of 3.25% on your saving")
+    void testStandardCalculation() {
+        double principal = 1000.00;
+        double rate = 3.25; 
+        double years = 2.0;
+        
+        double expected = 65.00;
+        
+        double actual = calculator.calculateSimpleInterest(principal, rate, years);
+        assertEquals(expected, actual, 0.0001, "That's a good amount of money.");
+    }
+}
