@@ -1,0 +1,38 @@
+//The scenario#1: Wanting to add a discount to an original price!
+// To make it simple for me, it's just $100 getting a 10% discount.
+
+
+public class DiscountCalculator {
+
+    public double calculateDiscountedPrice(double price, double discountRate) {
+      
+        if (price < 0 || discountRate < 0 || discountRate > 100) {
+            throw new IllegalArgumentException("Invalid input for price or rate.");
+        }
+        double finalPrice = price * (1 - discountRate / 100.0);
+        return Math.round(finalPrice * 100.0) / 100.0;
+    }
+}
+
+
+//Here is the unit testing for this code
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class DiscountCalculatorTest {
+
+    private final DiscountCalculator calculator = new DiscountCalculator();
+
+    @Test
+    @DisplayName("WOOOO THAT DISCOUNT")
+    void testStandardDiscount() {
+        double price = 100.00;
+        double rate = 10.0; 
+        
+        double expected = 90.00;
+        double actual = calculator.calculateDiscountedPrice(price, rate);
+
+        assertEquals(expected, actual, 0.0001, "A 10% discount on $100 should be $90.");
+    }
+}
