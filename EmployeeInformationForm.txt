@@ -1,0 +1,81 @@
+import java.awt.*;
+import java.awt.event.*;
+
+
+//Start of the form
+public class EmployeeInformationForm{
+	public static void main(String[] args) {
+	Frame frame = new Frame("Employee Information Form");
+	
+	//Enter the user/employee's name
+	Label label = new Label("Enter your name:");
+	label.setBounds(50, 50, 150, 30);
+	        
+	TextField textField = new TextField();
+	textField.setBounds(200, 50, 80, 30);
+	
+	//Enter the user/employee ID
+	Label label2 = new Label("Enter your Employee ID:");
+	label2.setBounds(50, 100, 150, 30);
+	        
+	TextField textField2 = new TextField();
+	textField2.setBounds(200, 100, 80, 30);
+	
+	//The department
+	Label label3 = new Label("Enter your department:");
+	label3.setBounds(50, 150, 150, 30);
+	        
+	TextField textField3 = new TextField();
+	textField3.setBounds(200, 150, 80, 30);
+	
+	//A button which will soon display the information
+	Button button = new Button("Submit");
+	button.setBounds(150, 200, 80, 30);
+	        
+	Label outputLabel = new Label();
+	outputLabel.setBounds(50, 250, 300, 30);
+	
+	Label outputLabel2 = new Label();
+	outputLabel2.setBounds(50, 280, 300, 30);
+	
+	Label outputLabel3 = new Label();
+	outputLabel3.setBounds(50, 310, 300, 30);
+	
+	
+	button.addActionListener(new ActionListener() {
+	   public void actionPerformed(ActionEvent e) {
+	        String name = textField.getText();
+	        outputLabel.setText("Employee's Name: " + name);
+	       
+	        String ID = textField2.getText();
+	        outputLabel2.setText("Employee ID: " + ID);
+	        
+	        String dept = textField3.getText();
+	        outputLabel3.setText("Employee's department: " + dept);
+	            }
+	        });
+	        
+	        //Frames
+	        frame.add(label);
+	        frame.add(label2);
+	        frame.add(label3);
+	        frame.add(textField);
+	        frame.add(textField2);
+	        frame.add(textField3);
+	        frame.add(button);
+	        frame.add(outputLabel);
+	        frame.add(outputLabel2);
+	        frame.add(outputLabel3);
+	        
+	        frame.setSize(400, 380);
+	        frame.setLayout(null);
+	        frame.setVisible(true);
+	        
+	        //To be able to close out the window
+	        frame.addWindowListener(new WindowAdapter() {
+	            public void windowClosing(WindowEvent e) {
+	                frame.dispose();
+	            }
+	        });
+	
+}}
