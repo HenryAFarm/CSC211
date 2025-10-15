@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class UserRegistration {
 
@@ -13,23 +12,23 @@ public class UserRegistration {
             frame.setTitle("User Registration");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            final int fieldColumns = 20;
+            int fieldColumns = 20;
             
             // The Labels
-            final JLabel nameLabel = new JLabel("Name:");
-            final JLabel emailLabel = new JLabel("Email:");
-            final JLabel passwordLabel = new JLabel("Password:");
-            final JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+            JLabel nameLabel = new JLabel("Name:");
+            JLabel emailLabel = new JLabel("Email:");
+            JLabel passwordLabel = new JLabel("Password:");
+            JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
           
             //The Textfields
-            final JTextField nameField = new JTextField(fieldColumns);
-            final JTextField emailField = new JTextField(fieldColumns);
-            final JPasswordField passwordField = new JPasswordField(fieldColumns);
-            final JPasswordField confirmPasswordField = new JPasswordField(fieldColumns);
+            JTextField nameField = new JTextField(fieldColumns);
+            JTextField emailField = new JTextField(fieldColumns);
+            JPasswordField passwordField = new JPasswordField(fieldColumns);
+            JPasswordField confirmPasswordField = new JPasswordField(fieldColumns);
 
             //The Buttons
-            final JButton submitButton = new JButton("Submit");
-            final JButton clearButton = new JButton("Clear");
+            JButton submitButton = new JButton("Submit");
+            JButton clearButton = new JButton("Clear");
 
             //FlowLayout
             JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15)); 
