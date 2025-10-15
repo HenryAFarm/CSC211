@@ -1,96 +1,107 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserRegistration {
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(new Runnable() {
             
-            //Frame
-            JFrame frame = new JFrame();
-            frame.setTitle("User Registration");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            public void run() {
 
-            int fieldColumns = 20;
-            
-            // The Labels
-            JLabel nameLabel = new JLabel("Name:");
-            JLabel emailLabel = new JLabel("Email:");
-            JLabel passwordLabel = new JLabel("Password:");
-            JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
-          
-            //The Textfields
-            JTextField nameField = new JTextField(fieldColumns);
-            JTextField emailField = new JTextField(fieldColumns);
-            JPasswordField passwordField = new JPasswordField(fieldColumns);
-            JPasswordField confirmPasswordField = new JPasswordField(fieldColumns);
+                //Frame
+                JFrame frame = new JFrame();
+                frame.setTitle("User Registration");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            //The Buttons
-            JButton submitButton = new JButton("Submit");
-            JButton clearButton = new JButton("Clear");
+                int fieldColumns = 20;
 
-            //FlowLayout
-            JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15)); 
-            panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                // The Labels
+                JLabel nameLabel = new JLabel("Name:");
+                JLabel emailLabel = new JLabel("Email:");
+                JLabel passwordLabel = new JLabel("Password:");
+                JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
 
-            //more of the FlowLayout
-            panel.add(nameLabel);
-            panel.add(nameField);
+                //The Textfields
+                JTextField nameField = new JTextField(fieldColumns);
+                JTextField emailField = new JTextField(fieldColumns);
+                JPasswordField passwordField = new JPasswordField(fieldColumns);
+                JPasswordField confirmPasswordField = new JPasswordField(fieldColumns);
 
-            panel.add(emailLabel);
-            panel.add(emailField);
+                //The Buttons
+                JButton submitButton = new JButton("Submit");
+                JButton clearButton = new JButton("Clear");
 
-            panel.add(passwordLabel);
-            panel.add(passwordField);
+                //FlowLayout
+                JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 15));
+                panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-            panel.add(confirmPasswordLabel);
-            panel.add(confirmPasswordField);
-            
-            panel.add(submitButton);
-            panel.add(clearButton);
+                //more of the FlowLayout
+                panel.add(nameLabel);
+                panel.add(nameField);
 
-            
-            //action of the clear button
-            clearButton.addActionListener(e -> {
-                nameField.setText("");
-                emailField.setText("");
-                passwordField.setText("");
-                confirmPasswordField.setText("");
-            });
+                panel.add(emailLabel);
+                panel.add(emailField);
 
-           //action of the submit button
-            submitButton.addActionListener(e -> {
-                String name = nameField.getText();
-                String email = emailField.getText();
-                
-                String password = new String(passwordField.getPassword());
-                String confirmPassword = new String(confirmPasswordField.getPassword());
+                panel.add(passwordLabel);
+                panel.add(passwordField);
 
-            //Validation 
-            //Checking if any field is empty
-                if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Error: All fields must be filled in before submission.", 
-                    "Now look back on what you're missing!",
-                    JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-               
-                String message = String.format(
-                    "Successful!\n\nName: %s\nEmail: %s\nPassword: %s",
-                    name, email, "*".repeat(password.length()) 
-                );
-                
-                JOptionPane.showMessageDialog(frame, message, 
-                "Submission Result", 
-                JOptionPane.INFORMATION_MESSAGE);
-            });
+                panel.add(confirmPasswordLabel);
+                panel.add(confirmPasswordField);
 
-            
-            frame.add(panel); 
-            frame.pack();
-            frame.setLocationRelativeTo(null); 
-            frame.setVisible(true);
+                panel.add(submitButton);
+                panel.add(clearButton);
+
+
+                //clear button
+                clearButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        nameField.setText("");
+                        emailField.setText("");
+                        passwordField.setText("");
+                        confirmPasswordField.setText("");
+                    }
+                });
+
+
+                //sumbit action
+                submitButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String name = nameField.getText();
+                        String email = emailField.getText();
+
+                    
+                        String password = new String(passwordField.getPassword());
+                        String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                        //Validation
+                        //Checking if any field is empty
+                        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                            JOptionPane.showMessageDialog(frame, "Error: All fields must be filled in before submission.",
+                            "Your Missing Information",
+                            JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        
+
+                        String message = String.format(
+                            "Successful!\n\nName: %s\nEmail: %s\nPassword: %s",
+                            name, email, "*".repeat(password.length()) 
+                        );
+
+                        JOptionPane.showMessageDialog(frame, message,
+                        "Submission Result",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    }
+                });
+
+
+                frame.add(panel);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
         });
     }
 }
