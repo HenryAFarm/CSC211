@@ -1,0 +1,132 @@
+//Inheritance
+class Animal {
+	private String name;
+	private String breed;
+
+    //no-arg Constructor
+    public Animal() {
+		this.name = "Unknown";
+		this.breed = "Unknown";
+	}
+
+	//my Constructor
+	public Animal(String name, String breed) {
+		this.name = name;
+		this.breed = breed;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public String getBreed() {
+		return breed;
+	}
+
+	public void speak() {
+		System.out.println(name + " is making a generic animal sound.");
+	}
+
+	public void sleep() {
+		System.out.println(name + " is sleeping on the ground.");
+	}
+  public void display(){
+    System.out.println(name + " is a " + breed + ".");
+  }
+}
+
+//Subclass of animal
+class Cat extends Animal {
+
+	public Cat(String name, String breed) {
+		super(name, breed);
+	}
+
+
+	@Override
+	public void speak() {
+		System.out.println(getName() + " says: Meow!");
+	}
+
+  @Override
+	public void sleep() {
+		System.out.println(getName() + " goes to bed in order to sleep.");
+	}
+	@Override
+	public void display(){
+        System.out.println(getName() + " is a " + getBreed() + ".");
+    }
+}
+
+//Composition 
+class Family {
+    private String owner;
+    private int years;
+    
+    public Family(String owner, int years){
+        this.owner = owner;
+        this.years = years;
+    }
+    public String getOwner(){
+        return owner;
+    }
+    public int getYears(){
+        return years;
+    }
+
+}
+
+//Composition "has a ...." 
+class House {
+
+	private Animal info;
+	private Family home;
+	
+	
+	public House(Cat info, Family home) {
+		this.info = info;
+		this.home = home;
+	}
+
+
+	public void Resident() {
+	    //Person
+	    System.out.println("----Resident's House----");
+	    System.out.println("Owner: " + home.getOwner());	
+	    System.out.println("Amount of years with this pet: " + home.getYears() + " years.");
+	    
+	    //Cat
+		System.out.println("\nProfile of pet:");
+		System.out.println("Name: " + info.getName() + ".");
+		System.out.print("Sound: " );
+		info.speak();
+		info.sleep();
+    
+	}
+}
+
+
+public class Main {
+	public static void main(String[] args) {
+
+		
+		//first is an animal parent class
+		Animal normal = new Animal();
+		normal.speak(); normal.sleep(); normal.display();
+		System.out.println("");
+		
+		//Animal with name
+		Animal normal2 = new Animal("Billy", "Bear");
+		normal2.speak(); normal2.sleep(); normal2.display();
+		System.out.println("");
+		
+		//Inheritance being in used
+		Cat myCat = new Cat("Luna", "SnowShoe");
+		myCat.speak(); myCat.sleep(); myCat.display();
+		System.out.println("");
+		
+		//Composition and polymorphism
+		Family f1 = new Family("Henry", 6);
+		House house = new House(myCat, f1);
+		house.Resident();
+		
+}}
