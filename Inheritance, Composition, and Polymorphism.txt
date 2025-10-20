@@ -41,13 +41,12 @@ class Cat extends Animal {
 		super(name, breed);
 	}
 
-
 	@Override
 	public void speak() {
 		System.out.println(getName() + " says: Meow!");
 	}
 
-  @Override
+   @Override
 	public void sleep() {
 		System.out.println(getName() + " goes to bed in order to sleep.");
 	}
@@ -103,7 +102,6 @@ class House {
     
 	}
 }
-
 
 public class Main {
 	public static void main(String[] args) {
