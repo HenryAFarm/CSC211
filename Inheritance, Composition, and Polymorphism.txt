@@ -74,7 +74,7 @@ class Family {
 
 }
 
-//Composition "has a ...." 
+//Composition "has a ...." / Polymorphism
 class House {
 
 	private Animal info;
