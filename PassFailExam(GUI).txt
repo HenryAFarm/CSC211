@@ -1,8 +1,3 @@
-//Assignment here( I guess made those print statements in PassFailExamDemo)
-//have a GUI display instead of being in the console logs.
-//Also using GradeDemo to be the result of this!!
-
-
 import javax.swing.JOptionPane;
 
 // first class (parent)
@@ -40,19 +35,7 @@ class PassFailActivity extends GradedActivity {
     private double minPassingScore;
 
     public PassFailActivity(double mps) {
-        minPassingScore = mps;
-    }
-
-    @Override
-    public char getGrade() {
-        char letterGrade;
-
-        if (super.getScore() >= minPassingScore)
-            letterGrade = 'P';
-        else
-            letterGrade = 'F';
-
-        return letterGrade;
+       minPassingScore = mps;
     }
 }
 
@@ -93,7 +76,7 @@ class PassFailExam extends PassFailActivity {
 }
 
 // final class
-public class PassFailExamDemo {
+public class Main {
     public static void main(String[] args) {
         String input;           // To hold user input
         int questions;          // Number of questions
@@ -101,66 +84,31 @@ public class PassFailExamDemo {
         double minPassing;      // Minimum passing score
         String output;          // To hold the output message
 
-        // 1. Get the number of questions on the exam (GUI input).
+        // 1. Get the number of questions on the exam
         input = JOptionPane.showInputDialog("How many questions are on the exam?");
         // Convert the String input to an int.
         questions = Integer.parseInt(input);
 
-        // 2. Get the number of questions missed (GUI input).
+        // 2. Get the number of questions missed
         input = JOptionPane.showInputDialog("How many questions did the student miss?");
         // Convert the String input to an int.
         missed = Integer.parseInt(input);
 
-        // 3. Get the minimum passing score (GUI input).
+        // 3. Get the minimum passing score
         input = JOptionPane.showInputDialog("What is the minimum passing score?");
         // Convert the String input to a double.
         minPassing = Double.parseDouble(input);
 
-        // Create a PassFailExam object.
-        PassFailExam exam = new PassFailExam(questions, missed, minPassing);
-
-        // Build the output message.
-        output = "Each question counts " + exam.getPointsEach() + " points.\n" +
-                 "The exam score is " + exam.getScore() + "\n" +
-                 "The exam grade is " + exam.getGrade();
-
-        // Display the results using a GUI message dialog.
-        JOptionPane.showMessageDialog(null, output);
         
-        // Terminate the program (necessary for JOptionPane in some environments).
-        System.exit(0); 
+        PassFailExam exam = new PassFailExam(questions, missed, minPassing);
+        //the output message.
+        output = String.format("Each question counts %.2f points.\n", exam.getPointsEach()) +
+                String.format("The exam score is %.2f\n", exam.getScore()) +
+                "The exam grade is " + exam.getGrade();
+
+
+        
+        JOptionPane.showMessageDialog(null, output);
+        System.exit(0);
     }
 }
-
-
-//Test this out with the GradedActivity
-/**
-import javax.swing.JOptionPane;
-public class GradeDemo
-{
-   public static void main(String[] args)
-   {
-      String input;        // To hold input
-      double testScore;    // A test score
-      
-      // Create a GradedActivity object.
-      GradedActivity grade = new GradedActivity();
-
-      // Get a test score.
-      input = JOptionPane.showInputDialog("Enter " +
-                           "a numeric test score.");
-      testScore = Double.parseDouble(input);
-
-      // Store the score in the grade object.
-      grade.setScore(testScore);
-      
-      // Display the letter grade for the score.
-      JOptionPane.showMessageDialog(null,
-                    "The grade for that test is " +
-                    grade.getGrade());
-
-      System.exit(0);
-   }
-}
-
-*/
