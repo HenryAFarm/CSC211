@@ -46,13 +46,9 @@ class PassFailExam extends PassFailActivity {
     private int numMissed;      // number missed
 
     public PassFailExam(int questions, int missed, double minPassing) {
-        // Call the superclass constructor.
         super(minPassing);
-
-        // Declare a local variable for the score.
         double numericScore;
 
-        // Set the numQuestions and numMissed fields.
         numQuestions = questions;
         numMissed = missed;
 
@@ -61,8 +57,6 @@ class PassFailExam extends PassFailActivity {
         pointsEach = 100.0 / questions;
         numericScore = 100.0 - (missed * pointsEach);
 
-        // Call the superclass's setScore method to
-        // set the numeric score.
         setScore(numericScore);
     }
 
