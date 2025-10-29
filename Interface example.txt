@@ -1,0 +1,71 @@
+//information of a cat
+//Simple example of using an interface
+interface sound{
+    public void soundCat();
+}
+interface walks{
+    public void walkCat();
+}
+
+class Cat implements walks, sound{
+    private String name;
+    private int age;
+    
+    //no arg constructor
+    public Cat(){
+        this.name = "Unknown";
+        this.age = 0;
+    }
+    
+    //para-constructor
+    public Cat(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+    @Override
+    public void soundCat(){
+        System.out.print(this.name + " says: Meow.");
+    }
+    @Override
+    public void walkCat(){
+        System.out.print(this.name + " walks: Walks with four legs which have paws.");
+    }
+    @Override
+    public String toString(){
+        String s = "Hey, your cat's name is " + this.name + " and I guess it's age is " +
+        this.age + " years old.";
+        return s;
+    }
+    
+}
+
+public class Main {
+    public static void main(String[] args){
+       Cat cat1 = new Cat("Mary", 8);
+       Cat cat2 = new Cat("Billy", 2);
+       
+       Cat unknown = new Cat();
+       System.out.println("---Unknown pet information: ");
+       System.out.println(unknown);
+       unknown.walkCat();
+       System.out.println("");
+       unknown.soundCat();
+       System.out.println("\n");
+       
+       
+       //calling cat1
+       System.out.println("---Pet Information#1:");
+       System.out.println(cat1);
+       cat1.walkCat();
+       System.out.println("");
+       cat1.soundCat();
+       System.out.println("\n");
+       
+       //calling cat2
+       System.out.println("---Pet Information#2:");
+       System.out.println(cat2);
+       cat2.walkCat();
+       System.out.println("");
+       cat2.soundCat();
+       
+}}
