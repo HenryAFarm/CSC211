@@ -1,0 +1,135 @@
+//Example of using an abstract class, along with its methods.
+
+import java.util.Scanner;
+
+abstract class House{
+    private double amountCost; //Cost of the house 
+    
+    //no args
+    public House() {
+        this.amountCost = 0.00;
+    }
+    // constructor
+    public House (double amountCost){
+        this.amountCost = amountCost;
+    }
+    
+    public void setAmountCost(double amountCost){
+        this.amountCost = amountCost;
+    }
+    public double getAmountCost(){
+        return amountCost;
+    }
+    
+    public abstract String colorOfHouse();
+    public abstract String Housefacts();
+}
+
+class Person extends House{
+    private int years;  //Amount of years living in the house
+    private String name;  // Your name
+    private String address; // Of course, where this person lives.
+    
+    public Person(){
+        super(0.00);
+        
+        this.years = 0;
+        this.name = "Unknown";
+        this.address = "Unknown";
+    }
+    
+    public Person(String name, String address, int years, double amountCost){
+        super(amountCost);
+        
+        this.name = name;
+        this.address = address; 
+        this.years = years;
+    }
+    @Override
+    public String Housefacts(){
+        return "It has ten doors and over 50 windows.";
+}
+    @Override
+    public String colorOfHouse(){
+        return "It is the color blue and yellow.";
+        
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
+    
+    public void setYears(int years){
+        this.years = years;
+    }
+    public int getYears(){
+        return years;
+    }
+    
+     public void setAddress(String address){
+        this.address = address;
+    }
+    public String getAddress(){
+        return address;
+    }
+    
+}
+
+public class Main{
+	public static void main(String[] args) {
+	Scanner input = new Scanner(System.in);
+	
+	//Just to have your info typed
+	System.out.print("Enter your full name: ");
+	String p1 = input.nextLine().trim();
+	//if user just pressed enter
+	if (p1.isBlank()){
+	    p1 = "Unknown";
+	}
+    
+	System.out.print("Enter the full address of your house: ");
+	String a1 = input.nextLine().trim();
+	//this too if pressed enter
+	if (a1.isBlank()){
+	    a1 = "Unknown";
+	}
+    
+    System.out.print("Enter the amount of years you were living in this house: ");
+    int yearsInput = input.nextInt();
+    input.nextLine();
+    
+    System.out.print("Enter the cost of this house: $");
+    double costInput = input.nextDouble();
+    input.nextLine();
+        
+        //Testing an example
+        Person resident0 = new Person();
+        resident0.setName("Bob Billy");
+        resident0.setAddress("656 Union ln");
+        resident0.setYears(21);
+        resident0.setAmountCost(9901.21);
+        
+        System.out.println("\n--- Resident and House Information Example ---");
+        System.out.println("Name: " + resident0.getName());
+        System.out.println("Address: " + resident0.getAddress());
+        System.out.println("Years Lived here: " + resident0.getYears()); 
+        System.out.println("House Cost: $" + resident0.getAmountCost());
+        
+        //User Information
+        Person resident = new Person(p1, a1, yearsInput, costInput);
+        
+        System.out.println("\n--- Resident and House Information of the user ---");
+        System.out.println("Name: " + resident.getName());
+        System.out.println("Address: " + resident.getAddress());
+        System.out.println("Years Lived here: " + resident.getYears()); 
+        System.out.println("House Cost: $" + resident.getAmountCost());
+        
+        //Simple example of having abstract methods
+        System.out.println("House Color: " + resident.colorOfHouse());
+        System.out.println("House Facts: " + resident.Housefacts());
+        
+    }
+}
