@@ -1,0 +1,65 @@
+// Getting a decimal to binary in either a recursive or an Iterative way. 
+
+public class DecimalToBinaryConverter {
+
+    public static String convertIterative(int decimal) {
+        //base case
+        if (decimal == 0) {
+            return "0"; 
+        }
+
+        StringBuilder binary = new StringBuilder();
+        int temp = decimal;
+
+        while (temp > 0) {
+            int remainder = temp % 2;
+            binary.insert(0, remainder);
+            temp = temp / 2;
+        }
+
+        return binary.toString();
+    }
+
+
+    public static String convertRecursive(int decimal) {
+        //base case
+        if (decimal == 0) {
+            return "0";
+        }
+
+        String binaryPrefix = convertRecursive(decimal / 2);
+        int remainder = decimal % 2;
+
+
+        if (binaryPrefix.equals("0") && decimal != 1) {
+             return String.valueOf(remainder);
+        } else if (binaryPrefix.equals("0") && decimal == 1) {
+            return String.valueOf(remainder);
+        }
+
+        return binaryPrefix + remainder;
+    }
+
+    public static void main(String[] args) {
+        int[] testNumbers = {0, 1, 12, 45, 100, 256};
+
+        System.out.println("--- Decimal to Binary Conversion ---"); 
+        
+        // to use all the values in the testNumber array.
+        for (int n : testNumbers) {
+            // Test Iterative Method
+            String iterativeResult = convertIterative(n);
+
+            // Test Recursive Method
+            String recursiveResult = convertRecursive(n);
+            
+            System.out.printf("Decimal: %3d = by a Iterative way into binary: %s\n", n, iterativeResult);
+            
+            if (n == 0) {
+                 recursiveResult = "0";
+            }
+            System.out.printf("Decimal: %3d = by Recursive way into Binary: %s\n", n, recursiveResult);
+
+        }
+    }
+}
