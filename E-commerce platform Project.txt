@@ -1,5 +1,8 @@
 //E-commerce Project by Henry Arevalo
-import java.util.streams.*;
+import java.util.List;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 //Superclass#1
 class User {
@@ -39,14 +42,21 @@ class Customer extends User {
     public Customer (String fName, String lName, int CustomerID){
         super(fName, lName);
         this.CustomerID = CustomerID;
+        this.shoppingCart = new ArrayList<>();
         
     }
     
-    public void addToCart(Product p){}
+    public void addToCart(Product p){
+        this.shoppingCart.add(p);
+    }
     
-    public void removeFromCart(Product p){}
+    public void removeFromCart(Product p){
+        this.shoppingCart.remove(p);
+    }
     
-    public List<Product> getShoppingCart();
+    public List<Product> getShoppingCart() {
+        return shoppingCart;
+    }
     
     
     
@@ -78,7 +88,7 @@ class Admin extends User {
     public void orderStatus(Order o, String newStatus){}
     
     // To look up a customers information
-    public CustomerDetails(Customer c){}
+    public void CustomerDetails(Customer c){}
     
     //the getter
     public String getAccessLevel(){
@@ -127,24 +137,24 @@ class Product {
 //subclass for product
 class Electronics extends Product {
    //String[] electronics = {"Computer", "Laptop", "iphone", "Samsung", "Watch"};
-    public Electronics(String Name, double Price) {
-    super(Name, "Electronics", Price); 
+    public Electronics(String Name, double Price, String ProductID) {
+    super(Name, "Electronics", Price, ProductID); 
 }
     
     
 }
 //subclass for product
-class clothing extends Product {
+class Clothing extends Product {
     //String[] clothes = {"Louis Vuitton", "Gucci", "Nike", "Adidas", "Forever 21"};
-    public Clothing(String Name, double Price) {
-    super(Name, "Clothes", Price); 
+    public Clothing(String Name, double Price, String ProductID) {
+    super(Name, "Clothes", Price, ProductID); 
      
 }
 //subclass for product
 class Grocery extends Product {
    // String[] grocery = {"Apples", "Banana", "Orange", "Kiwi", "Carrot"};
-     public Grocery(String Name, double Price) {
-    super(Name, "Grocery", Price); 
+     public Grocery(String Name, double Price, String ProductID) {
+    super(Name, "Grocery", Price, Product); 
      
      
 }
@@ -155,17 +165,35 @@ class Order {
     private List<Product> items;
     private double subtotal;
     private double totalAmount;
+    private final double TAX_RATE = 0.0875;
+    private final double SHIPPING_FEE = 2.50;
+    
+    public Order(Customer customer, List<Product> items){
+        this.customer = customer;
+        this.item = new ArrayList<>(items);
+        this.subtotal = calculateSubtotal(this.item);
+        this.totalAmount = 0.0;
+        
+    }
     
     public double calculateSubtotal(List<Product> cart) {
         //adds items together
+        return cart.stream()
+               .mapToDouble(Product::getPrice)
+               .sum();
         
     }
+    // add the tax and fees
     public double calculateTotal(){
-        // add the tax and fees
+    return this.subtotal * (1 + TAX_RATE) + SHIPPING_FEE;
     }
     
     public void processOrder(){
-        // to finalize the order and see the result.
+        this.totalAmount = calculateTotal();
+        
+    System.out.println("Order processed successfully for Customer ID: " + customer.getCustomerID());
+    System.out.printf("Subtotal: $%.2f%n", this.subtotal);
+    System.out.printf("Total Amount Due: $%.2f%n", this.totalAmount);
     }
     
     
@@ -174,14 +202,12 @@ class Order {
 
 public class Main{
 	public static void main(String[] args) {
-	    public double fee = 2.50;
-	    public double tax = 8.75%;
 	    
 	    //process cart
 	    cart.stream().mapTodouble(Product::getPrice.sum();
 	    
 	    //lambda expressions
-	    (subtotal) -> subtotal * (1 + tax) + fee;
+	    
 	    
 	    //discounts
 	    cart.stream().mapToDouble(p -> p.getPrice() * (1 - discountRate)).sum();
@@ -190,10 +216,10 @@ public class Main{
 	    products.stream().filter(p -> p.getCategory().equals("Electronics")).toList();
 	    
 	    //search
-	    products.stream().filter(p -> p.getName().contains("Laptop")).toList()
+	    products.stream().filter(p -> p.getName().contains("Laptop")).toList();
 	    
 	    //sorting from low to high
-	    products.stream().sorted(Comparator.comparingDouble(Product::getPrice)).toList()
+	    products.stream().sorted(Comparator.comparingDouble(Product::getPrice)).toList();
 	    
 	    
 	 //lambda expressions many more
@@ -203,4 +229,7 @@ public class Main{
 	    
 	    
 
-}}
+}
+    
+}
+    
