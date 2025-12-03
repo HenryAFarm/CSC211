@@ -1,0 +1,93 @@
+//E-commerce Project by Henry Arevalo
+//Superclass#1
+class User {
+    private String fName;
+    private String lName;
+    
+    //no-arg constructor
+    public User () {
+        fName = "Unknown";
+        lName = "Unknown";
+    }
+    //constructor
+    public User (String fName, String lName) {
+        this.fName = fName;
+        this.lName = lName;
+    }
+    
+}
+//subclass for user
+class Customer extends User {
+    //private ;
+    
+    public Customer (){
+        super(fName, lName);
+        
+        
+    }
+    
+    
+    
+}
+//subclass for user
+class Admin extends User {
+    private int ID;
+    
+    public Admin (int ID){
+        super(fName, lName);
+        
+    }
+    
+    
+}
+
+//Superclass#2
+class Product {
+    
+}
+//subclass for product
+class Electronics extends Product {
+    String[] electronics = {"Computer", "Laptop", "iphone", "Samsung", "Watch"};
+    
+    //Need the price for each!!!
+    
+}
+//subclass for product
+class clothing extends Product {
+    String[] clothes = {"Louis Vuitton", "Gucci", "Nike", "Adidas", "Forever 21"};
+     
+     
+}
+//subclass for product
+class Grocery extends Product {
+    String[] grocery = {"Apples", "Banana", "Orange", "Kiwi", "Carrot"};
+     
+     
+     
+}
+
+//Class for calulation
+class Order {
+    private double tax;
+    private double fee;
+    
+    
+    
+}
+
+
+public class Main{
+	public static void main(String[] args) {
+	    
+	    
+	    
+	    
+	 //lambda expressions many more
+	 //process cart totals, apply taxes, and calculate shipping fees.
+	 //applying filters on product categories or discounts
+	 
+	 // example Product name-product () -> return ??
+	    
+	    
+
+}}
