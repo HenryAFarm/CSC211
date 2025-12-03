@@ -1,4 +1,6 @@
 //E-commerce Project by Henry Arevalo
+import java.util.streams.*;
+
 //Superclass#1
 class User {
     private String fName;
@@ -15,16 +17,36 @@ class User {
         this.lName = lName;
     }
     
+    public String getfName(){
+        return fName;
+    }
+    public String getlName(){
+        return lName;
+    }
+    //edit later
+    public String toString(){
+        String s = "";
+        return s;
+    }
+    
 }
 //subclass for user
 class Customer extends User {
-    //private ;
+    private int CustomerID;
+    //to hold items of the Customer
+    private List<Product> shoppingCart;
     
-    public Customer (){
+    public Customer (String fName, String lName, int CustomerID){
         super(fName, lName);
-        
+        this.CustomerID = CustomerID;
         
     }
+    
+    public void addToCart(Product p){}
+    
+    public void removeFromCart(Product p){}
+    
+    public List<Product> getShoppingCart();
     
     
     
@@ -32,10 +54,35 @@ class Customer extends User {
 //subclass for user
 class Admin extends User {
     private int ID;
+    private String accessLevel;
     
-    public Admin (int ID){
+    public Admin (String fName, String lName, int ID, String accessLevel){
         super(fName, lName);
+        this.ID = ID;
+        this.accessLevel = accessLevel;
         
+    }
+    //To introduce new products
+    public void addProduct(Product p){}
+    
+    //To change the price of an existing items
+    public void updatePrice(Product p, double newPrice){}
+    
+    //To remove an item
+    public void removeProduct(Product p){}
+    
+    //To see the orders that the many customer have ordered
+    public void allOrders(List<Order> orders){}
+    
+    //to mark an order
+    public void orderStatus(Order o, String newStatus){}
+    
+    // To look up a customers information
+    public CustomerDetails(Customer c){}
+    
+    //the getter
+    public String getAccessLevel(){
+        return accessLevel;
     }
     
     
@@ -43,34 +90,83 @@ class Admin extends User {
 
 //Superclass#2
 class Product {
+    private String Name;
+    private String Category;
+    private double Price;
+    private String ProductID;
     
+    //no-arg
+    public Product(){
+      Name = "Unknown";
+      Category = "Unknown";
+      Price = 0.00;
+      ProductID = "0000";
+    }
+    // the constructor
+    public Product(String Name, String Category, double Price, String ProductID){
+       this.Name = Name;
+       this.Category = Category;
+       this.Price = Price;
+       this.ProductID = ProductID;
+    }
+    
+    public double getPrice(){
+        return Price;
+    }
+    public String Name(){
+        return Name;
+    }
+    
+    //purpose to list everyItem. 
+    public String toString(){
+        String s = "";
+        return s;
+        
+    }
 }
 //subclass for product
 class Electronics extends Product {
-    String[] electronics = {"Computer", "Laptop", "iphone", "Samsung", "Watch"};
+   //String[] electronics = {"Computer", "Laptop", "iphone", "Samsung", "Watch"};
+    public Electronics(String Name, double Price) {
+    super(Name, "Electronics", Price); 
+}
     
-    //Need the price for each!!!
     
 }
 //subclass for product
 class clothing extends Product {
-    String[] clothes = {"Louis Vuitton", "Gucci", "Nike", "Adidas", "Forever 21"};
-     
+    //String[] clothes = {"Louis Vuitton", "Gucci", "Nike", "Adidas", "Forever 21"};
+    public Clothing(String Name, double Price) {
+    super(Name, "Clothes", Price); 
      
 }
 //subclass for product
 class Grocery extends Product {
-    String[] grocery = {"Apples", "Banana", "Orange", "Kiwi", "Carrot"};
-     
+   // String[] grocery = {"Apples", "Banana", "Orange", "Kiwi", "Carrot"};
+     public Grocery(String Name, double Price) {
+    super(Name, "Grocery", Price); 
      
      
 }
 
 //Class for calulation
 class Order {
-    private double tax;
-    private double fee;
+    private Customer customer;
+    private List<Product> items;
+    private double subtotal;
+    private double totalAmount;
     
+    public double calculateSubtotal(List<Product> cart) {
+        //adds items together
+        
+    }
+    public double calculateTotal(){
+        // add the tax and fees
+    }
+    
+    public void processOrder(){
+        // to finalize the order and see the result.
+    }
     
     
 }
@@ -78,15 +174,32 @@ class Order {
 
 public class Main{
 	public static void main(String[] args) {
+	    public double fee = 2.50;
+	    public double tax = 8.75%;
 	    
+	    //process cart
+	    cart.stream().mapTodouble(Product::getPrice.sum();
 	    
+	    //lambda expressions
+	    (subtotal) -> subtotal * (1 + tax) + fee;
+	    
+	    //discounts
+	    cart.stream().mapToDouble(p -> p.getPrice() * (1 - discountRate)).sum();
+	    
+	    //filtering
+	    products.stream().filter(p -> p.getCategory().equals("Electronics")).toList();
+	    
+	    //search
+	    products.stream().filter(p -> p.getName().contains("Laptop")).toList()
+	    
+	    //sorting from low to high
+	    products.stream().sorted(Comparator.comparingDouble(Product::getPrice)).toList()
 	    
 	    
 	 //lambda expressions many more
 	 //process cart totals, apply taxes, and calculate shipping fees.
 	 //applying filters on product categories or discounts
 	 
-	 // example Product name-product () -> return ??
 	    
 	    
 
