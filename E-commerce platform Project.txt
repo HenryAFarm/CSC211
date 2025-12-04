@@ -26,9 +26,8 @@ class User {
     public String getlName(){
         return lName;
     }
-    //edit later
     public String toString(){
-        String s = "";
+        String s = "First name is: " + fName + " Last name is " + lName;
         return s;
     }
     
@@ -78,14 +77,14 @@ class Admin extends User {
     //To introduce new products
     public void addProduct(Product p, List<Product> catalog){
         catalog.add(p);
-        System.out.println("ADMIN: Added product: " + p.getName());
+        System.out.println("ADMIN: Added product--- " + p.getName());
         
     }
     
     //To change the price of an existing items
     public void updatePrice(Product p, double newPrice){
         p.setPrice(newPrice);
-        System.out.printf("ADMIN: Change price of: %s price updated to $%.2f%n",p.getName(), newPrice);
+        System.out.printf("ADMIN: Change price of: %s price updated to $%.2f%n", p.getName(), newPrice);
     }
     
     //To remove an item
@@ -100,10 +99,6 @@ class Admin extends User {
             System.out.println(o.toString());
             
         }
-    }
-         //setter
-    public void setStatus(String newStatus){
-        this.status = newStatus;
     }
     
     //to mark an order
@@ -124,14 +119,12 @@ class Admin extends User {
     public String getAccessLevel(){
         return accessLevel;
     }
-    
-    public String getID() { return "OrderID-001"; } // tem
-    public String toString() {
-        return String.format("Order for %s | ID: %s | Status: %s | Total: $%.2f", 
-            customer.getfName(), this.getID(), this.status, this.totalAmount);
+    @Override
+    public String toString(){
+        String s = "Admin: " + getfName() +" "+ getlName();
+        return s;
     }
-    
-    
+        
 }
 
 //Superclass#2
@@ -166,8 +159,11 @@ class Product {
     public String getName(){
         return Name;
     }
+    public String getCategory(){
+        return Category;
+    }
     
-    //purpose to list everyItem. 
+    //purpose to list every item. 
     public String toString(){
         String s = "All the items: "+ Name;
         return s;
@@ -197,7 +193,7 @@ class Grocery extends Product {
     } 
 }
 
-//Class for calulation
+//Class for calculation
 class Order {
     private Customer customer;
     private List<Product> items;
@@ -216,6 +212,12 @@ class Order {
         this.status = "PENDING";
         
     }
+    
+    //setter
+    public void setStatus(String newStatus){
+        this.status = newStatus;
+    }
+    
     
     public double calculateSubtotal(List<Product> cart) {
         //adds items together
@@ -236,7 +238,17 @@ class Order {
     System.out.printf("Subtotal: $%.2f%n", this.subtotal);
     System.out.printf("Total Amount Due: $%.2f%n", this.totalAmount);
     }
-    
+    //getter
+    public String getID() { 
+        return "ORDER- "+ this.customer.getCustomerID() + "-" + (int)(Math.random() * 1000); 
+        
+    } 
+   
+    @Override   
+    public String toString() {
+        return String.format("Order for %s | ID: %s | Status: %s | Total: $%.2f", 
+            customer.getfName(), this.getID(), this.status, this.totalAmount);
+    }
     
 }
 
@@ -265,26 +277,29 @@ public class Main{
 	    Customer customer1 = new Customer("Henry", "Doe", 101);
         customer1.addToCart(catalog.get(0)); 
         customer1.addToCart(catalog.get(9));
+        customer1.addToCart(catalog.get(7))
         
         
-        System.out.println("E-Commerce Operations");
+        System.out.println("----E-Commerce Operations----");
 	    
 	    //lambda expressions
 	   List<Product> electronics = catalog.stream()
             .filter(p -> p.getCategory().equals("Electronics"))
             .collect(Collectors.toList()); 
         
-        System.out.println("\n## Filtered Products (Electronics):");
-        electronics.forEach(p -> System.out.println(p.Name() + " ($" + p.getPrice() + ")"));
+        System.out.println("\nFiltered Products (Electronics):");
+        electronics.forEach(p -> System.out.println(p.getName() + " ($" + p.getPrice() + ")"));
 	    
 	    
 	    //search
 	    List<Product> searchResults = catalog.stream()
-            .filter(p -> p.Name().contains("iphone 15"))
+            .filter(p -> p.getName().contains("iphone 15"))
             .collect(Collectors.toList());
 	    
-	    System.out.println("\n Search Results (Contains 'iphone 15'):");
-        searchResults.forEach(p -> System.out.println(p.Name()));
+	    System.out.println("customer1 is searching: ");
+	    System.out.println("\nSearch Results (Contains 'iphone 15'):");
+        searchResults.forEach(p -> System.out.println("Item has been found: "p.getName() + p.getPrice()));
+        
         
         //sorting
         List<Product> sortedByPrice = catalog.stream()
@@ -292,10 +307,10 @@ public class Main{
             .collect(Collectors.toList());
             
         System.out.println("\n Products Sorted by Price (Low to High):");
-        sortedByPrice.forEach(p -> System.out.printf("%-20s $%.2f%n", p.Name(), p.getPrice()));
+        sortedByPrice.forEach(p -> System.out.printf("%-20s $%.2f%n", p.getName(), p.getPrice()));
 	    
 	    //Applying discounts of 10%
-	    double discountRate = 0.10; // 10% discount
+	    double discountRate = 0.10; 
         double discountedTotal = catalog.stream()
 	        .mapToDouble(p -> p.getPrice() * (1 - discountRate))
             .sum();
@@ -306,7 +321,9 @@ public class Main{
 	    
 	      //ADMIN
 	    Admin adminUser = new Admin("Jane", "Admin", 999, "frances");
-	    System.out.println("ADMIN OPERATION");
+	    System.out.println("---ADMIN OPERATION---");
+	    
+	   System.out.println(adminUser.toString());
 	    //adding a product
 	    Product newGadget = new Electronics("Smart Watch", 350.00, "E1099");
         adminUser.addProduct(newGadget, catalog);
@@ -328,7 +345,4 @@ public class Main{
         //testing
         System.out.println("\nOrder:");
         System.out.println(finalOrder.toString());
-	    
-}
-    }
-    
+}}
