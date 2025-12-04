@@ -320,7 +320,7 @@ public class Main{
 	    System.out.println("");
 	    
 	      //ADMIN
-	    Admin adminUser = new Admin("Jane", "Admin", 999, "frances");
+	    Admin adminUser = new Admin("Jane", "Frances", 999, "Company");
 	    System.out.println("---ADMIN OPERATION---");
 	    
 	   System.out.println(adminUser.toString());
