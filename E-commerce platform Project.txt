@@ -26,6 +26,7 @@ class User {
     public String getlName(){
         return lName;
     }
+    //edit later
     public String toString(){
         String s = "First name is: " + fName + " Last name is " + lName;
         return s;
@@ -109,7 +110,7 @@ class Admin extends User {
     
     // To look up a customers information
     public void CustomerDetails(Customer c){
-        System.out.println("\n[ADMIN] --- Customer Details ---");
+        System.out.println("\n----- Customer Details -----");
         System.out.println("Customer Name: " + c.getfName() + " " + c.getlName());
         System.out.println("Customer ID: " + c.getCustomerID());
         System.out.println("Cart size: " + c.getShoppingCart().size());
@@ -163,7 +164,7 @@ class Product {
         return Category;
     }
     
-    //purpose to list every item. 
+    //purpose to list everyItem. 
     public String toString(){
         String s = "All the items: "+ Name;
         return s;
@@ -238,9 +239,9 @@ class Order {
     System.out.printf("Subtotal: $%.2f%n", this.subtotal);
     System.out.printf("Total Amount Due: $%.2f%n", this.totalAmount);
     }
-    //getter
+    //getter and tem
     public String getID() { 
-        return "ORDER- "+ this.customer.getCustomerID() + "-" + (int)(Math.random() * 1000); 
+        return "ORDER- " + this.customer.getCustomerID() + "-" + (int)(Math.random() * 1000); 
         
     } 
    
@@ -257,7 +258,7 @@ public class Main{
 	public static void main(String[] args) {
 
 	    
-	    //The set up
+	    //The setup
 	    List<Product> catalog = new ArrayList<>();
         catalog.add(new Electronics("Laptop", 1200.00, "E1001"));
         catalog.add(new Electronics("iphone 15", 450.99, "E1002"));
@@ -277,7 +278,7 @@ public class Main{
 	    Customer customer1 = new Customer("Henry", "Doe", 101);
         customer1.addToCart(catalog.get(0)); 
         customer1.addToCart(catalog.get(9));
-        customer1.addToCart(catalog.get(7))
+        customer1.addToCart(catalog.get(7));
         
         
         System.out.println("----E-Commerce Operations----");
@@ -298,7 +299,7 @@ public class Main{
 	    
 	    System.out.println("customer1 is searching: ");
 	    System.out.println("\nSearch Results (Contains 'iphone 15'):");
-        searchResults.forEach(p -> System.out.println("Item has been found: "p.getName() + p.getPrice()));
+        searchResults.forEach(p -> System.out.println("Item has been found: " + p.getName()));
         
         
         //sorting
