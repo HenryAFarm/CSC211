@@ -315,7 +315,9 @@ public class Main{
 	    //adding a product
 	    Product newGadget = new Electronics("Smart Watch", 350.00, "E1099");
         adminUser.addProduct(newGadget, catalog);
-        
+
+//CHECK/ADD BEFORE AND AFTER COST OF THIS PRICE FOR THIS LAPTOP!!!!
+
         //changing the price of a Product
         Product laptop = catalog.get(0);
         adminUser.updatePrice(laptop, 1150.00);
