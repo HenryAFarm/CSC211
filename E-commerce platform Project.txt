@@ -67,13 +67,10 @@ class Customer extends User {
 //subclass for user
 class Admin extends User {
     private int ID;
-    private String accessLevel;
     
-    public Admin (String fName, String lName, int ID, String accessLevel){
+    public Admin (String fName, String lName, int ID){
         super(fName, lName);
         this.ID = ID;
-        this.accessLevel = accessLevel;
-        
     }
     //To introduce new products
     public void addProduct(Product p, List<Product> catalog){
@@ -93,15 +90,7 @@ class Admin extends User {
         catalog.remove(p);
         System.out.println("ADMIN: " + p.getName() + " removed.");
     }
-    
-    //To see the orders that the many customer have ordered
-    public void allOrders(List<Order> orders){
-        for(Order o : orders) {
-            System.out.println(o.toString());
-            
-        }
-    }
-    
+
     //to mark an order
      public void orderStatus(Order o, String newStatus){
         o.setStatus(newStatus);
@@ -116,13 +105,9 @@ class Admin extends User {
         System.out.println("Cart size: " + c.getShoppingCart().size());
     }
     
-    //the getter
-    public String getAccessLevel(){
-        return accessLevel;
-    }
     @Override
     public String toString(){
-        String s = "Admin: " + getfName() +" "+ getlName();
+        String s = "Admin: " + getfName() +" "+ getlName() +", ID: " +ID;
         return s;
     }
         
@@ -202,7 +187,6 @@ class Order {
     private double totalAmount;
     private final double TAX_RATE = 0.0875;
     private final double SHIPPING_FEE = 2.50;
-    private String finalOrder;
     private String status;
     
     public Order(Customer customer, List<Product> items){
@@ -321,12 +305,10 @@ public class Main{
 	        .mapToDouble(p -> p.getPrice() * (1 - discountRate))
             .sum();
         System.out.printf("\nDiscount (10%% off all items):\nTotal discounted of all items price: $%.2f%n", discountedTotal);
-	    
-	    
 	    System.out.println("");
 	    
 	      //ADMIN
-	    Admin adminUser = new Admin("Jane", "Frances", 999, "Company");
+	    Admin adminUser = new Admin("Jane", "Frances", 999);
 	    System.out.println("---ADMIN OPERATION---");
 	    
 	   System.out.println(adminUser.toString());
@@ -350,12 +332,14 @@ public class Main{
         //finalized the order
         Order finalOrder = new Order(customer1, customer1.getShoppingCart());
         finalOrder.processOrder();
-	    
+        
+           System.out.println("\nProcessing order:");
 	    //changing the status of order
 	    adminUser.orderStatus(finalOrder, "SHIPPED"); 
+	    
         
         //testing
-        System.out.println("\nOrder:");
+        System.out.println("\n----Order----");
         System.out.println(finalOrder.toString());
 }
     
