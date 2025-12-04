@@ -165,10 +165,10 @@ class Product {
     }
     
     //purpose to list everyItem. 
+    @Override
     public String toString(){
-        String s = "All the items: "+ Name;
-        return s;
-        
+    return String.format("%s (ID: %s, Category: %s) - $%.2f", 
+        this.Name, this.ProductID, this.Category, this.Price);
     }
 }
 //subclass for product
@@ -273,6 +273,11 @@ public class Main{
         catalog.add(new Grocery("Orange", 0.99, "G7474"));
         catalog.add(new Grocery("Carrot", 6.99, "G1833"));
         
+        
+        //listing everything
+        System.out.println("-----E-Commerce Product list-----");
+        catalog.forEach(product -> System.out.println(product.toString()));
+        
         //User 
 	    //first customer
 	    Customer customer1 = new Customer("Henry", "Doe", 101);
@@ -281,7 +286,7 @@ public class Main{
         customer1.addToCart(catalog.get(7));
         
         
-        System.out.println("----E-Commerce Operations----");
+        System.out.println("\n----E-Commerce Operations----");
 	    
 	    //lambda expressions
 	   List<Product> electronics = catalog.stream()
@@ -297,8 +302,8 @@ public class Main{
             .filter(p -> p.getName().contains("iphone 15"))
             .collect(Collectors.toList());
 	    
-	    System.out.println("customer1 is searching: ");
-	    System.out.println("\nSearch Results (Contains 'iphone 15'):");
+	    System.out.println("\ncustomer1 is searching: ");
+	    System.out.println("Search Results (Contains 'iphone 15'):");
         searchResults.forEach(p -> System.out.println("Item has been found: " + p.getName()));
         
         
@@ -307,7 +312,7 @@ public class Main{
             .sorted(Comparator.comparingDouble(Product::getPrice))
             .collect(Collectors.toList());
             
-        System.out.println("\n Products Sorted by Price (Low to High):");
+        System.out.println("\nProducts Sorted by Price (Low to High):");
         sortedByPrice.forEach(p -> System.out.printf("%-20s $%.2f%n", p.getName(), p.getPrice()));
 	    
 	    //Applying discounts of 10%
@@ -315,7 +320,7 @@ public class Main{
         double discountedTotal = catalog.stream()
 	        .mapToDouble(p -> p.getPrice() * (1 - discountRate))
             .sum();
-        System.out.printf("\n Discount (10%% off all items):\nTotal discounted cart price: $%.2f%n", discountedTotal);
+        System.out.printf("\nDiscount (10%% off all items):\nTotal discounted of all items price: $%.2f%n", discountedTotal);
 	    
 	    
 	    System.out.println("");
@@ -333,6 +338,12 @@ public class Main{
         Product laptop = catalog.get(0);
         adminUser.updatePrice(laptop, 1150.00);
         
+        //list after edit
+         System.out.println("\n-----E-Commerce updated Product list-----");
+        catalog.forEach(product -> System.out.println(product.toString()));
+        
+        System.out.println("---END OF ADMIN OPERATION---");
+        System.out.println("");
         //views customer Details
         adminUser.CustomerDetails(customer1);
         
@@ -346,4 +357,6 @@ public class Main{
         //testing
         System.out.println("\nOrder:");
         System.out.println(finalOrder.toString());
-}}
+}
+    
+}
