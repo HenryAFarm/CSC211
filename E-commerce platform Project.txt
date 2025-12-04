@@ -58,6 +58,9 @@ class Customer extends User {
         return shoppingCart;
     }
     
+    public int getCustomerID(){
+        return CustomerID;
+    }
     
     
 }
@@ -73,22 +76,43 @@ class Admin extends User {
         
     }
     //To introduce new products
-    public void addProduct(Product p){}
+    public void addProduct(Product p, List<Product> catalog){
+        catalog.add(p);
+        System.out.println(p.Name() + " added.");
+        
+    }
     
     //To change the price of an existing items
-    public void updatePrice(Product p, double newPrice){}
+    public void updatePrice(Product p, double newPrice){
+        p.setPrice(newPrice);
+        System.out.println(p.Name() + " price updated to $" + newPrice);
+    }
     
     //To remove an item
-    public void removeProduct(Product p){}
+    public void removeProduct(Product p, List<Product> catalog){
+        catalog.remove(p);
+        System.out.println(p.Name() + " removed.");
+    }
     
     //To see the orders that the many customer have ordered
-    public void allOrders(List<Order> orders){}
+    public void allOrders(List<Order> orders){
+        for(Order o : orders) {
+            System.out.println(o.toString());
+            
+        }
+    }
     
     //to mark an order
-    public void orderStatus(Order o, String newStatus){}
-    
+    /* public void orderStatus(Order o, String newStatus){
+        o.setStatus(newStatus);
+       System.out.println("Order " + o.getID() + " Status set to " + newStatus);
+    }
+    */
     // To look up a customers information
-    public void CustomerDetails(Customer c){}
+    public void CustomerDetails(Customer c){
+        System.out.println("Customer Name: " + c.getfName() + " " + c.getlName());
+        System.out.println("Customer ID: " + c.getCustomerID());
+    }
     
     //the getter
     public String getAccessLevel(){
@@ -120,16 +144,20 @@ class Product {
        this.ProductID = ProductID;
     }
     
+    public void setPrice(double newPrice){
+        Price = newPrice;
+    }
+    
     public double getPrice(){
         return Price;
     }
-    public String Name(){
+    public String getName(){
         return Name;
     }
     
     //purpose to list everyItem. 
     public String toString(){
-        String s = "";
+        String s = "All the items: "+ Name;
         return s;
         
     }
@@ -202,13 +230,34 @@ class Order {
 
 public class Main{
 	public static void main(String[] args) {
-	    
-	    //process cart
-	    cart.stream().mapTodouble(Product::getPrice.sum();
+	    //The set up
+	    List<Product> catalog = new ArrayList<>();
+        catalog.add(new Electronics("Laptop", 1200.00, "E1001"));
+        catalog.add(new Electronics("iphone 15", 450.99, "E1002"));
+        catalog.add(new Clothing("Louis Vuitton", 768.99, "C2001"));
+        catalog.add(new Grocery("Apples", 4.99, "G3001"));
+        
+        System.out.println("E-Commerce Operations");
 	    
 	    //lambda expressions
+	   List<Product> electronics = catalog.stream()
+            .filter(p -> p.getCategory().equals("Electronics"))
+            .collect(Collectors.toList()); 
+        
+        System.out.println("\n## Filtered Products (Electronics):");
+        electronics.forEach(p -> System.out.println(p.Name() + " ($" + p.getPrice() + ")"));
 	    
 	    
+	    //search
+	    List<Product> searchResults = catalog.stream()
+            .filter(p -> p.Name().contains("iphone 15"))
+            .collect(Collectors.toList());
+	    
+	    System.out.println("\n## Search Results (Contains 'iphone 15'):");
+        searchResults.forEach(p -> System.out.println(p.Name()));
+	    
+    	//process cart
+	    cart.stream().mapTodouble(Product::getPrice.sum();    
 	    //discounts
 	    cart.stream().mapToDouble(p -> p.getPrice() * (1 - discountRate)).sum();
 	    
@@ -221,11 +270,9 @@ public class Main{
 	    //sorting from low to high
 	    products.stream().sorted(Comparator.comparingDouble(Product::getPrice)).toList();
 	    
-	    
-	 //lambda expressions many more
-	 //process cart totals, apply taxes, and calculate shipping fees.
-	 //applying filters on product categories or discounts
 	 
+	     //testing
+	    Order.toString();
 	    
 	    
 
