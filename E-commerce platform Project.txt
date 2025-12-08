@@ -223,9 +223,9 @@ class Order {
     System.out.printf("Subtotal: $%.2f%n", this.subtotal);
     System.out.printf("Total Amount Due: $%.2f%n", this.totalAmount);
     }
-    //getter and tem
+    //getter
     public String getID() { 
-        return "ORDER- " + this.customer.getCustomerID() + "-" + (int)(Math.random() * 1000); 
+        return "for Henry " + this.customer.getCustomerID() + "-" + (int)(Math.random() * 1000); 
         
     } 
    
@@ -316,10 +316,12 @@ public class Main{
 	    Product newGadget = new Electronics("Smart Watch", 350.00, "E1099");
         adminUser.addProduct(newGadget, catalog);
 
-//CHECK/ADD BEFORE AND AFTER COST OF THIS PRICE FOR THIS LAPTOP!!!!
 
+        System.out.println("--ADMIN UPDATE OF A PRODUCT--");
         //changing the price of a Product
         Product laptop = catalog.get(0);
+		//before price of laptop
+		System.out.printf("ADMIN: Price of %s BEFORE update: $%.2f%n", laptop.getName(), laptop.getPrice());
         adminUser.updatePrice(laptop, 1150.00);
         
         //list after edit
