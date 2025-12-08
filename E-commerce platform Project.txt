@@ -26,7 +26,7 @@ class User {
     public String getlName(){
         return lName;
     }
-    //edit later
+    //to be used for other subclasses
     public String toString(){
         String s = "First name is: " + fName + " Last name is " + lName;
         return s;
